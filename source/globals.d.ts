@@ -40,6 +40,11 @@ declare module '*.gql' {
 	export = string;
 }
 
+declare module '*.css' {
+	const content: string;
+	export default content;
+}
+
 // Custom UI events specific to RGH
 interface GlobalEventHandlersEventMap {
 	'details:toggled': CustomEvent;
@@ -91,4 +96,13 @@ interface Node extends EventTarget {
 
 interface SignalAsOptions {
 	signal?: AbortSignal;
+}
+
+// Support for import.meta.glob
+interface ImportMeta {
+	glob: (patterns: string[], options?: {
+		eager?: boolean;
+		import?: string;
+		as?: string;
+	}) => Record<string, () => Promise<any>>;
 }

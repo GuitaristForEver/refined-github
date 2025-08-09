@@ -1,0 +1,500 @@
+/* Deployments Overview Styles - Card-based Layout */
+
+/* Main deployment section */
+.rgh-deployment-section {
+	background: var(--color-canvas-default);
+	border: 1px solid var(--color-border-default);
+	border-radius: 6px;
+	margin: 16px 0;
+	padding: 0;
+	overflow: hidden;
+	position: relative; /* allow absolute close button */
+}
+
+/* Deployment header with title */
+.rgh-deployment-header {
+	padding: 16px;
+	border-bottom: 1px solid var(--color-border-muted);
+	background: var(--color-canvas-subtle);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.rgh-deployment-title {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--color-fg-default);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.rgh-current-env {
+	color: var(--color-fg-muted);
+	font-weight: 500;
+}
+
+/* Cards container */
+.rgh-deployment-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 16px;
+	padding: 16px;
+}
+
+/* Individual environment cards */
+.rgh-env-card {
+	position: relative;
+	border: 1px solid var(--color-border-default);
+	border-radius: 12px;
+	padding: 16px;
+	background: var(--color-canvas-subtle);
+	transition: transform 80ms ease-in, box-shadow 0.15s ease-in-out;
+	min-height: 120px;
+}
+
+.rgh-env-card:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Card header */
+.rgh-env-card-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.rgh-env-card-icon .rgh-deployment-status-icon {
+	width: 20px;
+	height: 20px;
+}
+
+/* make in-progress icon spin slightly like GitHub */
+.rgh-env-card.rgh-status-in_progress .rgh-deployment-status-icon {
+	animation: rgh-spin 1s linear infinite;
+}
+
+.rgh-env-card-name {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--color-fg-default);
+	line-height: 1.25;
+}
+
+/* Card content */
+.rgh-env-card-content {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.rgh-env-card-version {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 4px 8px;
+	border-radius: 6px;
+	align-self: flex-start;
+	background: var(--color-neutral-muted);
+	color: var(--color-fg-default);
+}
+
+/* Version badge on emphasis backgrounds */
+.rgh-env-card.rgh-status-success .rgh-env-card-version,
+.rgh-env-card.rgh-status-error .rgh-env-card-version,
+.rgh-env-card.rgh-status-failure .rgh-env-card-version,
+.rgh-env-card.rgh-status-pending .rgh-env-card-version,
+.rgh-env-card.rgh-status-queued .rgh-env-card-version,
+.rgh-env-card.rgh-status-in_progress .rgh-env-card-version {
+	background: rgba(255, 255, 255, 0.15);
+	color: var(--color-fg-on-emphasis);
+}
+
+.rgh-env-card-time {
+	font-size: 14px;
+	color: var(--color-fg-muted);
+}
+
+.rgh-env-card-status {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.rgh-status-text {
+	font-size: 12px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+/* Status-based card styling with subtle filled backgrounds (GitHub-like) */
+.rgh-deployment-section .rgh-env-card.rgh-status-success {
+	background: var(--bgColor-success-muted, var(--color-success-subtle)) !important;
+	border-color: var(--borderColor-muted, var(--color-border-default)) !important;
+	color: var(--fgColor-default, var(--color-fg-default)) !important;
+}
+.rgh-env-card.rgh-status-success .rgh-deployment-status-icon,
+.rgh-env-card.rgh-status-success .rgh-status-text {
+	color: var(--fgColor-success, var(--color-success-fg));
+}
+
+.rgh-deployment-section .rgh-env-card.rgh-status-error,
+.rgh-deployment-section .rgh-env-card.rgh-status-failure {
+	background: var(--bgColor-danger-muted, var(--color-danger-subtle)) !important;
+	border-color: var(--borderColor-muted, var(--color-border-default)) !important;
+	color: var(--fgColor-default, var(--color-fg-default)) !important;
+}
+.rgh-env-card.rgh-status-error .rgh-deployment-status-icon,
+.rgh-env-card.rgh-status-error .rgh-status-text,
+.rgh-env-card.rgh-status-failure .rgh-deployment-status-icon,
+.rgh-env-card.rgh-status-failure .rgh-status-text {
+	color: var(--fgColor-danger, var(--color-danger-fg));
+}
+
+.rgh-deployment-section .rgh-env-card.rgh-status-pending,
+.rgh-deployment-section .rgh-env-card.rgh-status-queued {
+	background: var(--bgColor-attention-muted, var(--color-attention-subtle)) !important;
+	border-color: var(--borderColor-muted, var(--color-border-default)) !important;
+	color: var(--fgColor-default, var(--color-fg-default)) !important;
+}
+.rgh-env-card.rgh-status-pending .rgh-deployment-status-icon,
+.rgh-env-card.rgh-status-pending .rgh-status-text,
+.rgh-env-card.rgh-status-queued .rgh-deployment-status-icon,
+.rgh-env-card.rgh-status-queued .rgh-status-text {
+	color: var(--fgColor-attention, var(--color-attention-fg));
+}
+
+.rgh-deployment-section .rgh-env-card.rgh-status-in_progress {
+	background: var(--bgColor-accent-muted, var(--color-accent-subtle)) !important;
+	border-color: var(--borderColor-muted, var(--color-border-default)) !important;
+	color: var(--fgColor-default, var(--color-fg-default)) !important;
+}
+.rgh-env-card.rgh-status-in_progress .rgh-deployment-status-icon,
+.rgh-env-card.rgh-status-in_progress .rgh-status-text {
+	color: var(--fgColor-accent, var(--color-accent-fg));
+}
+
+.rgh-deployment-section .rgh-env-card.rgh-status-inactive,
+.rgh-deployment-section .rgh-env-card.rgh-status-unknown {
+	background: var(--bgColor-neutral-muted, var(--color-neutral-subtle)) !important;
+	border-color: var(--borderColor-muted, var(--color-border-default)) !important;
+	color: var(--fgColor-default, var(--color-fg-default)) !important;
+}
+.rgh-env-card.rgh-status-inactive .rgh-status-text,
+.rgh-env-card.rgh-status-unknown .rgh-status-text {
+	color: var(--fgColor-muted, var(--color-fg-muted));
+}
+
+/* Card link overlay */
+.rgh-env-card-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	color: transparent;
+	text-decoration: none;
+}
+
+.rgh-env-card-link:hover {
+	text-decoration: none;
+}
+
+.rgh-deployment-close {
+	background: transparent;
+	border: none;
+	color: var(--color-fg-muted);
+	font-size: 24px; /* bigger */
+	line-height: 1;
+	cursor: pointer;
+	padding: 6px 10px; /* larger hit area */
+	border-radius: 8px;
+	position: absolute;
+	top: 6px;
+	right: 6px; /* top-right corner of section */
+	z-index: 2;
+}
+.rgh-deployment-close:hover {
+	background: var(--color-neutral-muted);
+	color: var(--color-fg-default);
+}
+
+/* Legacy pill styling for PR and Release pages */
+.rgh-env-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 12px;
+	border-radius: 50px;
+	background: var(--color-canvas-subtle);
+	border: 1px solid var(--color-border-default);
+	color: var(--color-fg-default);
+	text-decoration: none;
+	margin-right: 8px;
+	margin-bottom: 8px;
+	transition: background-color 0.2s;
+}
+
+.rgh-env-pill:hover {
+	background: var(--color-canvas-default);
+	text-decoration: none;
+}
+
+.rgh-env-pill .rgh-deployment-status-icon {
+	width: 16px;
+	height: 16px;
+}
+
+.rgh-env-name {
+	font-weight: 600;
+	margin-right: 8px;
+}
+
+.rgh-env-meta {
+	color: var(--color-fg-muted);
+	font-size: 12px;
+}
+
+.rgh-env-status {
+	font-weight: 500;
+}
+
+/* Status icons */
+.rgh-deployment-status-icon {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
+}
+/* Ensure icons use currentColor even if the SVG defaults differ */
+.rgh-deployment-status-icon path,
+.rgh-deployment-status-icon circle,
+.rgh-deployment-status-icon rect,
+.rgh-deployment-status-icon polygon {
+	fill: currentColor;
+	stroke: currentColor;
+}
+
+.rgh-status-success {
+	color: var(--color-success-fg);
+}
+
+.rgh-status-error {
+	color: var(--color-danger-fg);
+}
+
+.rgh-status-pending {
+	color: var(--color-attention-fg);
+}
+
+.rgh-status-progress {
+	color: var(--color-accent-fg);
+	animation: rgh-spin 1s linear infinite;
+}
+
+.rgh-status-inactive {
+	color: var(--color-neutral-muted);
+}
+
+.rgh-status-unknown {
+	color: var(--fgColor-muted, var(--color-fg-muted));
+}
+
+@keyframes rgh-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* Deployment Matrix Modal */
+.rgh-deployment-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999;
+}
+
+.rgh-deployment-modal-content {
+	background: var(--color-canvas-default);
+	border: 1px solid var(--borderColor-default, var(--color-border-muted));
+	border-radius: 8px;
+	max-width: 90vw;
+	max-height: 90vh;
+	overflow: auto;
+	box-shadow: var(--color-shadow-large);
+}
+
+.rgh-deployment-modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	border-bottom: 1px solid var(--borderColor-muted, var(--color-border-default));
+}
+
+.rgh-deployment-modal-header h2 {
+	margin: 0;
+	font-size: 20px;
+	color: var(--fgColor-default, var(--color-fg-default));
+}
+
+.rgh-deployment-modal-close {
+	background: none;
+	border: none;
+	font-size: 24px;
+	color: var(--fgColor-muted, var(--color-fg-muted));
+	cursor: pointer;
+	padding: 4px;
+	line-height: 1;
+}
+
+.rgh-deployment-modal-close:hover {
+	color: var(--fgColor-default, var(--color-fg-default));
+}
+
+.rgh-deployment-matrix {
+	padding: 20px;
+}
+
+.rgh-deployment-row {
+	display: flex;
+	align-items: center;
+	padding: 12px 0;
+	border-bottom: 1px solid var(--borderColor-muted, var(--color-border-default));
+}
+
+.rgh-deployment-row:last-child {
+	border-bottom: none;
+}
+
+.rgh-deployment-env {
+	flex: 0 0 140px;
+	font-weight: 600;
+	color: var(--fgColor-default, var(--color-fg-default));
+}
+
+.rgh-deployment-details {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	flex: 1;
+	font-size: 13px;
+}
+
+.rgh-deployment-details span {
+	color: var(--fgColor-muted, var(--color-fg-muted));
+}
+
+/* PR Deployment Pills */
+.rgh-pr-deployments {
+	margin-top: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.rgh-pr-deployment-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 8px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 500;
+}
+
+.rgh-pr-deployment-pill.rgh-status-success {
+	background: var(--color-success-subtle);
+	color: var(--color-success-fg);
+}
+
+.rgh-pr-deployment-pill.rgh-status-error,
+.rgh-pr-deployment-pill.rgh-status-failure {
+	background: var(--color-danger-subtle);
+	color: var(--color-danger-fg);
+}
+
+.rgh-pr-deployment-pill.rgh-status-pending,
+.rgh-pr-deployment-pill.rgh-status-queued {
+	background: var(--color-attention-subtle);
+	color: var(--color-attention-fg);
+}
+
+.rgh-pr-deployment-pill.rgh-status-progress,
+.rgh-pr-deployment-pill.rgh-status-in_progress {
+	background: var(--color-accent-subtle);
+	color: var(--color-accent-fg);
+}
+
+.rgh-pr-deployment-pill.rgh-status-unknown {
+	background: var(--color-neutral-subtle);
+	color: var(--fgColor-muted, var(--color-fg-muted));
+}
+
+/* Release Deployment Pills */
+.rgh-release-deployments {
+	margin: 20px 0;
+	padding: 16px;
+	background: var(--color-canvas-subtle);
+	border: 1px solid var(--borderColor-muted, var(--color-border-default));
+	border-radius: 6px;
+}
+
+.rgh-release-deployments h3 {
+	margin: 0 0 12px 0;
+	font-size: 16px;
+	color: var(--fgColor-default, var(--color-fg-default));
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.rgh-deployment-bar {
+		margin: 12px 0;
+		padding: 12px;
+	}
+	
+	.rgh-deployment-pills {
+		gap: 8px;
+	}
+	
+	.rgh-env-pill {
+		font-size: 11px;
+		padding: 6px 8px;
+	}
+	
+	.rgh-deployment-modal-content {
+		margin: 20px;
+		max-width: calc(100vw - 40px);
+		max-height: calc(100vh - 40px);
+	}
+	
+	.rgh-deployment-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+	
+	.rgh-deployment-env {
+		flex: none;
+	}
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+	.rgh-deployment-modal {
+		background: rgba(0, 0, 0, 0.7);
+	}
+}
